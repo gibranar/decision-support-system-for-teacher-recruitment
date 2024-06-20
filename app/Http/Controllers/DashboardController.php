@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cagur;
+use App\Models\Gap;
 use App\Models\Kriteria;
 use App\Models\NilaiProfil;
 use App\Models\Perhitungan;
+use App\Models\PerhitunganAkhir;
+use App\Models\PerhitunganGap;
 use App\Models\SubKriteria;
 use Illuminate\Http\Request;
 
@@ -13,8 +16,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $rank = Perhitungan::with('cagur')
-            ->orderBy('rank', 'asc')
+        $gaps = Gap::all();
+        $rank = PerhitunganAkhir::with('cagur')
+            ->orderBy('total_nilai', 'asc')
             ->take(5)->get();
         
         $top1 = $rank->first();
@@ -29,6 +33,6 @@ class DashboardController extends Controller
         $sub_kriteria1 = SubKriteria::where('id_k', $kriteria1->id)->get();
         $sub_kriteria = SubKriteria::all()->groupBy('id_k');
 
-        return view('index', compact('top1', 'top2', 'top3', 'top4', 'top5', 'kriteria1', 'kriteria', 'sub_kriteria1', 'sub_kriteria'));
+        return view('index', compact('gaps', 'top1', 'top2', 'top3', 'top4', 'top5', 'kriteria1', 'kriteria', 'sub_kriteria1', 'sub_kriteria'));
     }
 }

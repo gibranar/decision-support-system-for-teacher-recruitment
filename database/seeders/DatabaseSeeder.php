@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         Cagur::factory()->count(5)->create();
         $this->call(KriteriaSeeder::class);
         $this->call(SubKriteriaSeeder::class);
+        $this->call(GapSeeder::class);
         // IdealProfil::factory()->count(6)->create();
         // NilaiProfil::factory()->count(2)->create();
         // Perhitungan::factory()->count(2)->create();

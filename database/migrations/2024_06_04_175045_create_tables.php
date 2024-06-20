@@ -44,6 +44,14 @@ class CreateTables extends Migration
             $table->foreign('id_k')->references('id')->on('kriteria')->onDelete('cascade')->onUpdate('cascade');
         });
 
+        Schema::create('gap', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('gap');
+            $table->decimal('bobot_nilai', 8, 1);
+            $table->string('keterangan');
+            $table->timestamps();
+        });
+
         Schema::create('ideal_profil', function (Blueprint $table) {
             $table->increments('id'); // Ensure that `id` is a primary key
             $table->integer('id_k')->unsigned();
@@ -71,20 +79,27 @@ class CreateTables extends Migration
             $table->primary(['id_cagur', 'id_k', 'id_sk']);
         });
 
-        Schema::create('perhitungan', function (Blueprint $table) {
+        Schema::create('perhitungan_gap', function (Blueprint $table) {
             $table->integer('id_cagur')->unsigned();
             $table->integer('id_sk')->unsigned();
-            $table->integer('ideal_profil')->unsigned();
+            $table->integer('ideal_profil');
             $table->integer('gap');
-            $table->integer('bobot_gap');
-            $table->decimal('jumlah_nilai');
-            $table->decimal('rata_rata');
-            $table->decimal('total_nilai');
+            $table->decimal('bobot_gap', 8, 1);
             $table->timestamps();
 
             $table->foreign('id_cagur')->references('id_cagur')->on('nilai_profil')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_sk')->references('id')->on('sub_kriteria')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ideal_profil')->references('id')->on('ideal_profil')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->primary(['id_cagur', 'id_sk']);
+        });
+
+        Schema::create('perhitungan_akhir', function (Blueprint $table) {
+            $table->integer('id_cagur')->unsigned();
+            $table->integer('id_sk')->unsigned();
+            $table->decimal('jumlah_nilai', 8, 1);
+            $table->decimal('rata_rata', 8, 4);
+            $table->decimal('total_nilai', 8, 4);
+            $table->timestamps();
 
             $table->primary(['id_cagur', 'id_sk']);
         });
@@ -126,6 +141,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('sub_kriteria');
         Schema::dropIfExists('kriteria');
         Schema::dropIfExists('cagur');
-        Schema::dropIfExists('perhitungan');
+        Schema::dropIfExists('perhitungan_gap');
+        Schema::dropIfExists('perhitungan_akhir');
     }
 }

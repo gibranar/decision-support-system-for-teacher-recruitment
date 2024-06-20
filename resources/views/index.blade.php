@@ -217,89 +217,19 @@
                                     <th class="border-bottom pb-2">Keterangan</th>
                                 </tr>
                             </thead>
+                            @foreach ($gaps as $gap)
                             <tbody>
                                 <tr>
-                                    <td class="ps-0">1</td>
-                                    <td>
-                                        <p class="mb-0">0</p>
-                                    </td>
-                                    <td>5</td>
-                                    <td class="text-wrap">Tidak Ada Selisih (kompetensi sesuai dengan yang
-                                        dibutuhkan)</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">2</td>
-                                    <td>
-                                        <p class="mb-0">1</p>
-                                    </td>
-                                    <td>4,5</td>
-                                    <td class="text-wrap">Kompetensi individu kelebihan 1 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">3</td>
-                                    <td>
-                                        <p class="mb-0">-1</p>
-                                    </td>
-                                    <td>4</td>
-                                    <td class="text-wrap">Kompetensi individu kekurangan 1 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">4</td>
-                                    <td>
-                                        <p class="mb-0">2</p>
-                                    </td>
-                                    <td>3,5</td>
-                                    <td class="text-wrap">Kompetensi individu kelebihan 2 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">5</td>
-                                    <td>
-                                        <p class="mb-0">-2</p>
-                                    </td>
-                                    <td>3</td>
-                                    <td class="text-wrap">Kompetensi individu kekurangan 2 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">6</td>
-                                    <td>
-                                        <p class="mb-0">3</p>
-                                    </td>
-                                    <td>2,5</td>
-                                    <td class="text-wrap">Kompetensi individu kelebihan 3 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0 pb-0">7</td>
+                                    <td class="ps-0 pb-0">{{ $loop->iteration }}</td>
                                     <td class="pb-0">
-                                        <p class="mb-0">-3</p>
+                                        <p class="mb-0">{{ $gap->gap }}</p>
                                     </td>
-                                    <td class="pb-0">2</td>
-                                    <td class="text-wrap">Kompetensi individu kekurangan 3 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0 pb-0">8</td>
-                                    <td class="pb-0">
-                                        <p class="mb-0">4</p>
-                                    </td>
-                                    <td class="pb-0">1,5</td>
-                                    <td class="text-wrap">Kompetensi individu kelebihan 4 tingkat/level
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0 pb-0">9</td>
-                                    <td class="pb-0">
-                                        <p class="mb-0">-4</p>
-                                    </td>
-                                    <td class="pb-0">1</td>
-                                    <td class="text-wrap">Kompetensi individu kekurangan 4 tingkat/level
+                                    <td class="pb-0">{{ $gap->bobot_nilai }}</td>
+                                    <td class="text-wrap">{{ $gap->keterangan }}
                                     </td>
                                 </tr>
                             </tbody>
+                            @endforeach
                         </table>
                     </div>
                 </div>

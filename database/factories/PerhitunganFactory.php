@@ -18,9 +18,12 @@ class PerhitunganFactory extends Factory
         return [
             'id_cagur' => $this->faker->numberBetween(1, 5),
             'id_sk' => $this->faker->numberBetween(1, 2),
+            'ideal_profil' => $this->faker->numberBetween(0, 4),
             'gap' => $this->faker->numberBetween(0, 5),
-            'total_nilai' => $this->faker->numberBetween(50, 100),
-            'rank' => $this->faker->numberBetween(1, 10),
+            'bobot_gap' => $this->faker->numberBetween(0, 5),
+            'jumlah_nilai' => $this->faker->numberBetween(50, 100),
+            'rata_rata' => $this->faker->numberBetween(1, 10),
+            'total_nilai' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

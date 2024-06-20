@@ -5,22 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Perhitungan extends Model
+class PerhitunganAkhir extends Model
 {
     use HasFactory;
-
-    protected $table = 'perhitungan';
-
+    protected $table = 'perhitungan_akhir';
     protected $fillable = [
         'id_cagur',
         'id_sk',
-        'gap',
-        'bobot_gap',
-        'jumlah_nilai',
-        'rata_rata',
-        'total_nilai',
+        'nilai_profil',
+        'bobot_nilai',
     ];
-
     public function nilaiProfil()
     {
         return $this->belongsTo(NilaiProfil::class, 'id_cagur', 'id_sk');

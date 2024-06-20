@@ -65,10 +65,11 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($cagur as $cagur)
+                                    @foreach ($cagurs as $cagur)
                                         <tbody>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ ($cagurs->currentPage() - 1) * $cagurs->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td>{{ $cagur->nama }}</td>
                                                 <td>{{ $cagur->telp }}</td>
                                                 <td>{{ $cagur->Pendidikan }}</td>
@@ -92,6 +93,50 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+
+                                {{-- PAGINATED --}}
+                                <div class="mt-4" style="width: fit-content; height: fit-content">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($cagurs->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $cagurs->previousPageUrl() }}" rel="prev"
+                                                    aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Numbered Page Links --}}
+                                        @for ($i = 1; $i <= $cagurs->lastPage(); $i++)
+                                            <li class="page-item {{ $cagurs->currentPage() == $i ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $cagurs->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($cagurs->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $cagurs->nextPageUrl() }}" rel="next"
+                                                    aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <div class="pagination-info">
+                                        Total data: {{ $cagurs->total() }} | Halaman: {{ $cagurs->currentPage() }} dari
+                                        {{ $cagurs->lastPage() }}
+                                    </div>
+                                </div>
+                                {{-- PAGINATED END --}}
+                                
                             </div>
                         </div>
                     </div>
@@ -116,7 +161,8 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                placeholder="Nama">
                         </div>
                         <div class="form-group">
                             <label for="telp">Nomor Telpon</label>

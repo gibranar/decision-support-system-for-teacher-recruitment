@@ -56,10 +56,11 @@
                                             <th>Nilai Profil</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($nilaiProfil as $nilaiProfil)
+                                    @foreach ($nilaiProfils as $nilaiProfil)
                                         <tbody>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ ($nilaiProfils->currentPage() - 1) * $nilaiProfils->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td>{{ $nilaiProfil->cagur->nama }}</td>
                                                 <td>{{ $nilaiProfil->subKriteria->kriteria->nama }}</td>
                                                 <td>{{ $nilaiProfil->subKriteria->desc }}</td>
@@ -68,6 +69,52 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+
+                                {{-- PAGINATED --}}
+                                <div class="mt-4" style="width: fit-content; height: fit-content">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($nilaiProfils->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $nilaiProfils->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Numbered Page Links --}}
+                                        @for ($i = 1; $i <= $nilaiProfils->lastPage(); $i++)
+                                            <li class="page-item {{ $nilaiProfils->currentPage() == $i ? 'active' : '' }}">
+                                                <a class="page-link"
+                                                    href="{{ $nilaiProfils->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($nilaiProfils->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $nilaiProfils->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <div class="pagination-info">
+                                        Total data: {{ $nilaiProfils->total() }} | Halaman:
+                                        {{ $nilaiProfils->currentPage() }} dari
+                                        {{ $nilaiProfils->lastPage() }}
+                                    </div>
+                                </div>
+                                {{-- PAGINATED END --}}
+
                             </div>
                         </div>
                     </div>
@@ -79,7 +126,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Tabel Perhitungan</p>
+                    <p class="card-title">Tabel Perhitungan Gap</p>
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
@@ -89,25 +136,109 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nama</th>
+                                            <th>Kriteria</th>
                                             <th>Nilai Profil Calon Guru</th>
                                             <th>Nilai Profil Standar</th>
                                             <th>Gap</th>
                                             <th>Nilai Bobot Gap</th>
+                                            <th>Jenis Kriteria</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach ($perhitunganGaps as $perhitungan)
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ ($perhitunganGaps->currentPage() - 1) * $perhitunganGaps->perPage() + $loop->iteration }}
+                                                </td>
+                                                <td>{{ $perhitungan->cagur->nama }}</td>
+                                                <td>{{ $perhitungan->subKriteria->kriteria->nama }}</td>
+                                                <td>{{ $perhitungan->subKriteria->nilai }}</td>
+                                                <td>{{ $perhitungan->ideal_profil }}</td>
+                                                <td>{{ $perhitungan->gap }}</td>
+                                                <td>{{ $perhitungan->bobot_gap }}</td>
+                                                <td>{{ $perhitungan->subKriteria->kriteria->jenis }}</td>
+                                            </tr>
+                                        </tbody>
+                                    @endforeach
+                                </table>
+
+                                {{-- PAGINATED --}}
+                                <div class="mt-4" style="width: fit-content; height: fit-content">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($perhitunganGaps->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganGaps->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Numbered Page Links --}}
+                                        @for ($i = 1; $i <= $perhitunganGaps->lastPage(); $i++)
+                                            <li class="page-item {{ $perhitunganGaps->currentPage() == $i ? 'active' : '' }}">
+                                                <a class="page-link"
+                                                    href="{{ $perhitunganGaps->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($perhitunganGaps->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganGaps->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <div class="pagination-info">
+                                        Total data: {{ $perhitunganGaps->total() }} | Halaman:
+                                        {{ $perhitunganGaps->currentPage() }} dari
+                                        {{ $perhitunganGaps->lastPage() }}
+                                    </div>
+                                </div>
+                                {{-- PAGINATED END --}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Tabel Perhitungan Akhir</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="example" class="display table table-striped table-borderless expandable-table"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama</th>
                                             <th>Jenis Kriteria</th>
                                             <th>Jumlah Nilai</th>
                                             <th>Rata-Rata</th>
                                             <th>Total Nilai</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($perhitungan as $perhitungan)
+                                    @foreach ($perhitunganAkhirs as $perhitungan)
                                         <tbody>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ ($perhitunganAkhirs->currentPage() - 1) * $perhitunganAkhirs->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td>{{ $perhitungan->cagur->nama }}</td>
-                                                <td>{{ $perhitungan->subKriteria->nilai }}</td>
-                                                <td>{{ $perhitungan->subKriteria->nilai }}</td>
-                                                <td>{{ $perhitungan->gap }}</td>
-                                                <td>{{ $perhitungan->bobot_gap }}</td>
                                                 <td>{{ $perhitungan->subKriteria->kriteria->jenis }}</td>
                                                 <td>{{ $perhitungan->jumlah_nilai }}</td>
                                                 <td>{{ $perhitungan->rata_rata }}</td>
@@ -116,6 +247,52 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+
+                                {{-- PAGINATED --}}
+                                <div class="mt-4" style="width: fit-content; height: fit-content">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($perhitunganAkhirs->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganAkhirs->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Numbered Page Links --}}
+                                        @for ($i = 1; $i <= $perhitunganAkhirs->lastPage(); $i++)
+                                            <li class="page-item {{ $perhitunganAkhirs->currentPage() == $i ? 'active' : '' }}">
+                                                <a class="page-link"
+                                                    href="{{ $perhitunganAkhirs->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($perhitunganAkhirs->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganAkhirs->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <div class="pagination-info">
+                                        Total data: {{ $perhitunganAkhirs->total() }} | Halaman:
+                                        {{ $perhitunganAkhirs->currentPage() }} dari
+                                        {{ $perhitunganAkhirs->lastPage() }}
+                                    </div>
+                                </div>
+                                {{-- PAGINATED END --}}
+
                             </div>
                         </div>
                     </div>
@@ -141,7 +318,7 @@
                                             <th>Rank</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($ranking as $ranking)
+                                    @foreach ($rankings as $ranking)
                                         <tbody>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
@@ -152,6 +329,52 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+
+                                {{-- PAGINATED --}}
+                                <div class="mt-4" style="width: fit-content; height: fit-content">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($perhitunganAkhirs->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganAkhirs->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Numbered Page Links --}}
+                                        @for ($i = 1; $i <= $perhitunganAkhirs->lastPage(); $i++)
+                                            <li class="page-item {{ $perhitunganAkhirs->currentPage() == $i ? 'active' : '' }}">
+                                                <a class="page-link"
+                                                    href="{{ $perhitunganAkhirs->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($perhitunganAkhirs->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $perhitunganAkhirs->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <div class="pagination-info">
+                                        Total data: {{ $perhitunganAkhirs->total() }} | Halaman:
+                                        {{ $perhitunganAkhirs->currentPage() }} dari
+                                        {{ $perhitunganAkhirs->lastPage() }}
+                                    </div>
+                                </div>
+                                {{-- PAGINATED END --}}
+
                             </div>
                         </div>
                     </div>

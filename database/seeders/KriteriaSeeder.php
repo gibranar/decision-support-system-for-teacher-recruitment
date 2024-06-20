@@ -27,6 +27,12 @@ class KriteriaSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'nama' => 'Pengalaman_Mengajar',
+                'jenis' => 'Core Factor',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'nama' => 'Umur',
                 'jenis' => 'Secondary Factor',
                 'created_at' => now(),
@@ -39,13 +45,7 @@ class KriteriaSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'Pengalaman Mengajar',
-                'jenis' => 'Core Factor',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama' => 'Sertifikasi Keahlian',
+                'nama' => 'Sertifikasi_Keahlian',
                 'jenis' => 'Secondary Factor',
                 'created_at' => now(),
                 'updated_at' => now(),
