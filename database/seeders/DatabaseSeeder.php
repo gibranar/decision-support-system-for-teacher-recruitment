@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Cagur::factory()->count(5)->create();
+        // Cagur::factory()->count(5)->create();
         $this->call(KriteriaSeeder::class);
         $this->call(SubKriteriaSeeder::class);
         $this->call(GapSeeder::class);

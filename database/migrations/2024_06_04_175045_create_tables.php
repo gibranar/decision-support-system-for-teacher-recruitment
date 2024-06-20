@@ -19,9 +19,9 @@ class CreateTables extends Migration
             $table->string('telp');
             $table->string('Pendidikan');
             $table->string('IPK');
+            $table->string('Pengalaman_Mengajar');
             $table->string('Umur');
             $table->string('Psikotes');
-            $table->string('Pengalaman_Mengajar');
             $table->string('Sertifikasi_Keahlian');
             $table->timestamps();
         });
@@ -98,16 +98,19 @@ class CreateTables extends Migration
             $table->integer('id_sk')->unsigned();
             $table->decimal('jumlah_nilai', 8, 1);
             $table->decimal('rata_rata', 8, 4);
-            $table->decimal('total_nilai', 8, 4);
+            $table->decimal('total_rata_rata', 8, 4);
             $table->timestamps();
 
+            $table->foreign('id_cagur')->references('id_cagur')->on('nilai_profil')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_sk')->references('id')->on('sub_kriteria')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->primary(['id_cagur', 'id_sk']);
         });
 
         Schema::create('ranking', function (Blueprint $table) {
             $table->integer('id_cagur')->unsigned();
-            $table->integer('total_nilai');
-            $table->tinyInteger('rank');
+            $table->decimal('total_nilai', 8, 4);
+            $table->tinyInteger('rank')->nullable(true);
             $table->timestamps();
 
             $table->foreign('id_cagur')->references('id_cagur')->on('nilai_profil')->onDelete('cascade')->onUpdate('cascade');

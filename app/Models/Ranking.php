@@ -18,4 +18,8 @@ class Ranking extends Model
     {
         return $this->belongsTo(Cagur::class, 'id_cagur');
     }
+    public function perhitunganAkhir()
+    {
+        return $this->hasMany(PerhitunganAkhir::class, 'id_cagur');
+    }
 }

@@ -58,9 +58,9 @@
                                             <th>Nomor Telepon</th>
                                             <th>Pendidikan</th>
                                             <th>IPK</th>
+                                            <th>Pengalaman Mengajar</th>
                                             <th>Umur</th>
                                             <th>Psikotes</th>
-                                            <th>Pengalaman Mengajar</th>
                                             <th>Sertifikasi Keahlian</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -74,9 +74,9 @@
                                                 <td>{{ $cagur->telp }}</td>
                                                 <td>{{ $cagur->Pendidikan }}</td>
                                                 <td>{{ $cagur->IPK }}</td>
+                                                <td>{{ $cagur->Pengalaman_Mengajar }}</td>
                                                 <td>{{ $cagur->Umur }}</td>
                                                 <td>{{ $cagur->Psikotes }}</td>
-                                                <td>{{ $cagur->Pengalaman_Mengajar }}</td>
                                                 <td>{{ $cagur->Sertifikasi_Keahlian }}</td>
                                                 <td>
                                                     <form action="{{ route('cagur.destroy', $cagur->id) }}" method="POST">

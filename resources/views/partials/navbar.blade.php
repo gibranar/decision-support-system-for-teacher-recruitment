@@ -30,7 +30,7 @@
             <a class="navbar-brand brand-logo me-5 d-flex align-items-center fs-5" href="../index.html"><img
                     src="../assets/images/whiteboard.png" class="me-2" alt="logo" />Kelompok 1</a>
             <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="../assets/images/whiteboard.png"
-                    alt="logo" /></a>
+                    alt="logo" />K1</a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

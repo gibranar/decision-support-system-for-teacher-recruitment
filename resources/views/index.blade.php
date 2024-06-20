@@ -9,30 +9,6 @@
                     <h6 class="font-weight-normal mb-0">Mengajar dengan Hati, Menuntun Masa Depan!
                     </h6>
                 </div>
-                <div class="col-12 col-xl-4">
-                    <div class="justify-content-end d-flex">
-                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                            <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button"
-                                id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="mdi mdi-calendar" id="datetime" style="font-style: normal;"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                <a class="dropdown-item" href="#">January</a>
-                                <a class="dropdown-item" href="#">February</a>
-                                <a class="dropdown-item" href="#">March</a>
-                                <a class="dropdown-item" href="#">April</a>
-                                <a class="dropdown-item" href="#">May</a>
-                                <a class="dropdown-item" href="#">June</a>
-                                <a class="dropdown-item" href="#">July</a>
-                                <a class="dropdown-item" href="#">August</a>
-                                <a class="dropdown-item" href="#">September</a>
-                                <a class="dropdown-item" href="#">October</a>
-                                <a class="dropdown-item" href="#">November</a>
-                                <a class="dropdown-item" href="#">December</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -59,7 +35,7 @@
                             <p class="mb-4 fs-4 fw-bold">Top 1</p>
                             <p class="fs-30 mb-3 lh-sm">{{ $top1 ? $top1->cagur->nama : 'Belum Ada' }} (Skor:
                                 {{ $top1 ? $top1->total_nilai : '0' }})</p>
-                            <p>081-225-445-621</p>
+                            <p class="fs-5">{{ $top1 ? $top1->cagur->telp : '0' }}</p>
                         </div>
                     </div>
                 </div>
@@ -69,7 +45,7 @@
                             <p class="mb-4 fs-4 fw-bold">Top 2</p>
                             <p class="fs-30 mb-3 lh-sm">{{ $top2 ? $top2->cagur->nama : 'Belum Ada' }} (Skor:
                                 {{ $top2 ? $top2->total_nilai : '0' }})</p>
-                            <p>081-225-445-621</p>
+                                <p class="fs-5">{{ $top2 ? $top2->cagur->telp : '0' }}</p>
                         </div>
                     </div>
                 </div>
@@ -79,7 +55,7 @@
                             <p class="mb-4 fs-4 fw-bold">Top 3</p>
                             <p class="fs-30 mb-3 lh-sm">{{ $top3 ? $top3->cagur->nama : 'Belum Ada' }} (Skor:
                                 {{ $top3 ? $top3->total_nilai : '0' }})</p>
-                            <p>081-225-445-621</p>
+                                <p class="fs-5">{{ $top3 ? $top3->cagur->telp : '0' }}</p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +67,7 @@
                             <p class="mb-4 fs-4 fw-bold">Top 4</p>
                             <p class="fs-30 mb-3 lh-sm">{{ $top4 ? $top4->cagur->nama : 'Belum Ada' }} (Skor:
                                 {{ $top4 ? $top4->total_nilai : '0' }})</p>
-                            <p>081-225-445-621</p>
+                                <p class="fs-5">{{ $top4 ? $top4->cagur->telp : '0' }}</p>
                         </div>
                     </div>
                 </div>
@@ -101,7 +77,7 @@
                             <p class="mb-4 fs-4 fw-bold">Top 5</p>
                             <p class="fs-30 mb-3 lh-sm">{{ $top5 ? $top5->cagur->nama : 'Belum Ada' }} (Skor:
                                 {{ $top5 ? $top5->total_nilai : '0' }})</p>
-                            <p>081-225-445-621</p>
+                                <p class="fs-5">{{ $top5 ? $top5->cagur->telp : '0' }}</p>
                         </div>
                     </div>
                 </div>

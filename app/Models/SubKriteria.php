@@ -26,4 +26,8 @@ class SubKriteria extends Model
     {
         return $this->hasMany(NilaiProfil::class, 'id_sk');
     }
+    public function perhitunganGap()
+    {
+        return $this->hasMany(PerhitunganGap::class, 'id_sk');
+    }
 }

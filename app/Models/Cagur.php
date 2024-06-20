@@ -27,8 +27,12 @@ class Cagur extends Model
         return $this->hasMany(NilaiProfil::class, 'id_cagur');
     }
 
-    public function perhitungan()
+    public function perhitunganAkhir()
     {
-        return $this->hasMany(Perhitungan::class, 'id_cagur');
+        return $this->hasMany(PerhitunganAkhir::class, 'id_cagur');
+    }
+    public function ranking()
+    {
+        return $this->hasOne(Ranking::class, 'id_cagur');
     }
 }

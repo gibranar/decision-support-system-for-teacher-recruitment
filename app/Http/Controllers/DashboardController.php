@@ -9,6 +9,7 @@ use App\Models\NilaiProfil;
 use App\Models\Perhitungan;
 use App\Models\PerhitunganAkhir;
 use App\Models\PerhitunganGap;
+use App\Models\Ranking;
 use App\Models\SubKriteria;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $gaps = Gap::all();
-        $rank = PerhitunganAkhir::with('cagur')
-            ->orderBy('total_nilai', 'asc')
-            ->take(5)->get();
+        $rank = Ranking::orderBy('rank', 'asc')->take(5)->get();
         
         $top1 = $rank->first();
         $top2 = $rank->skip(1)->first();

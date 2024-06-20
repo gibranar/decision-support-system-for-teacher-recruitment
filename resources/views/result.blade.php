@@ -179,7 +179,8 @@
 
                                         {{-- Numbered Page Links --}}
                                         @for ($i = 1; $i <= $perhitunganGaps->lastPage(); $i++)
-                                            <li class="page-item {{ $perhitunganGaps->currentPage() == $i ? 'active' : '' }}">
+                                            <li
+                                                class="page-item {{ $perhitunganGaps->currentPage() == $i ? 'active' : '' }}">
                                                 <a class="page-link"
                                                     href="{{ $perhitunganGaps->url($i) }}">{{ $i }}</a>
                                             </li>
@@ -218,6 +219,11 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Tabel Perhitungan Akhir</p>
+                    <form action="{{ route('storeResult') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success text-light fw-medium mb-4">Lakukan
+                            Perhitungan</button>
+                    </form>
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
@@ -230,7 +236,7 @@
                                             <th>Jenis Kriteria</th>
                                             <th>Jumlah Nilai</th>
                                             <th>Rata-Rata</th>
-                                            <th>Total Nilai</th>
+                                            <th>Total Rata-Rata</th>
                                         </tr>
                                     </thead>
                                     @foreach ($perhitunganAkhirs as $perhitungan)
@@ -242,7 +248,7 @@
                                                 <td>{{ $perhitungan->subKriteria->kriteria->jenis }}</td>
                                                 <td>{{ $perhitungan->jumlah_nilai }}</td>
                                                 <td>{{ $perhitungan->rata_rata }}</td>
-                                                <td>{{ $perhitungan->total_nilai }}</td>
+                                                <td>{{ $perhitungan->total_rata_rata }}</td>
                                             </tr>
                                         </tbody>
                                     @endforeach
@@ -266,7 +272,8 @@
 
                                         {{-- Numbered Page Links --}}
                                         @for ($i = 1; $i <= $perhitunganAkhirs->lastPage(); $i++)
-                                            <li class="page-item {{ $perhitunganAkhirs->currentPage() == $i ? 'active' : '' }}">
+                                            <li
+                                                class="page-item {{ $perhitunganAkhirs->currentPage() == $i ? 'active' : '' }}">
                                                 <a class="page-link"
                                                     href="{{ $perhitunganAkhirs->url($i) }}">{{ $i }}</a>
                                             </li>
@@ -305,10 +312,15 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Tabel Ranking</p>
+                    <form action="{{ route('storeRank') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success text-light fw-medium mb-4">Lihat Ranking</button>
+                    </form>
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table id="example" class="display table table-striped table-borderless expandable-table"
+                                <table id="example"
+                                    class="display table table-striped table-borderless expandable-table"
                                     style="width:100%">
                                     <thead>
                                         <tr>
@@ -321,7 +333,7 @@
                                     @foreach ($rankings as $ranking)
                                         <tbody>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ ($rankings->currentPage() - 1) * $rankings->perPage() + $loop->iteration }}</td>
                                                 <td>{{ $ranking->cagur->nama }}</td>
                                                 <td>{{ $ranking->total_nilai }}</td>
                                                 <td>{{ $ranking->rank }}</td>
@@ -334,30 +346,31 @@
                                 <div class="mt-4" style="width: fit-content; height: fit-content">
                                     <ul class="pagination">
                                         {{-- Previous Page Link --}}
-                                        @if ($perhitunganAkhirs->onFirstPage())
+                                        @if ($rankings->onFirstPage())
                                             <li class="page-item disabled" aria-disabled="true"
                                                 aria-label="@lang('pagination.previous')">
                                                 <span class="page-link" aria-hidden="true">&lsaquo;</span>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $perhitunganAkhirs->previousPageUrl() }}"
+                                                <a class="page-link" href="{{ $rankings->previousPageUrl() }}"
                                                     rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
                                             </li>
                                         @endif
 
                                         {{-- Numbered Page Links --}}
-                                        @for ($i = 1; $i <= $perhitunganAkhirs->lastPage(); $i++)
-                                            <li class="page-item {{ $perhitunganAkhirs->currentPage() == $i ? 'active' : '' }}">
+                                        @for ($i = 1; $i <= $rankings->lastPage(); $i++)
+                                            <li
+                                                class="page-item {{ $rankings->currentPage() == $i ? 'active' : '' }}">
                                                 <a class="page-link"
-                                                    href="{{ $perhitunganAkhirs->url($i) }}">{{ $i }}</a>
+                                                    href="{{ $rankings->url($i) }}">{{ $i }}</a>
                                             </li>
                                         @endfor
 
                                         {{-- Next Page Link --}}
-                                        @if ($perhitunganAkhirs->hasMorePages())
+                                        @if ($rankings->hasMorePages())
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $perhitunganAkhirs->nextPageUrl() }}"
+                                                <a class="page-link" href="{{ $rankings->nextPageUrl() }}"
                                                     rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
                                             </li>
                                         @else
@@ -368,9 +381,9 @@
                                         @endif
                                     </ul>
                                     <div class="pagination-info">
-                                        Total data: {{ $perhitunganAkhirs->total() }} | Halaman:
-                                        {{ $perhitunganAkhirs->currentPage() }} dari
-                                        {{ $perhitunganAkhirs->lastPage() }}
+                                        Total data: {{ $rankings->total() }} | Halaman:
+                                        {{ $rankings->currentPage() }} dari
+                                        {{ $rankings->lastPage() }}
                                     </div>
                                 </div>
                                 {{-- PAGINATED END --}}

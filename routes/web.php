@@ -15,3 +15,5 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('cagur', CagurController::class);
 
 Route::get('/result', [ResultController::class, 'index'])->name('result');
+Route::post('/result', [ResultController::class, 'store'])->name('storeResult');
+Route::post('/result/rank', [ResultController::class, 'storeRank'])->name('storeRank');
