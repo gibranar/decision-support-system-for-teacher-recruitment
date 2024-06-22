@@ -1,3 +1,54 @@
+## Kriteria yang Digunakan
+- Pendidikan
+- IPK
+- Pengalaman Mengajar
+- Umur
+- Psikotes
+- Sertifikasi Keahlian
+
+## Cara menggunakan program
+Duplikat proyek
+
+```bash
+  git clone https://github.com/gibranar/decision-support-system-for-teacher-recruitment.git
+```
+
+Masuk ke direktori proyek 
+```bash
+  cd my-project
+```
+
+- Install Composer terlebih dahulu (jika belum) 
+
+Perbarui Composer di terminal
+
+```bash
+  composer update
+```
+
+Generate APP_KEY 
+
+```bash
+  php artisan key:generate
+```
+
+Jalankan migration tabel
+
+```bash
+  php artisan migrate
+```
+
+Jalankan migration seeder
+
+```bash
+  php artisan migrate --seed
+```
+
+Jalankan server
+
+```bash
+  php artisan serve
+```
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
