@@ -126,11 +126,6 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::table('perhitungan', function (Blueprint $table) {
-            $table->dropForeign(['id_cagur']);
-            $table->dropForeign(['id_sk']);
-        });
-
         Schema::table('nilai_profil', function (Blueprint $table) {
             $table->dropForeign(['id_cagur']);
             $table->dropForeign(['id_sk']);

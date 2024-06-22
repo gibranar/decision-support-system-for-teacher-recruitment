@@ -25,7 +25,7 @@ class CagurController extends Controller
     }
     public function show(Cagur $cagur)
     {
-        return view('cagur', compact('cagur'));
+        return $cagur;
     }
     public function store(Request $request)
     {
